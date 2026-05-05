@@ -1,28 +1,39 @@
 import { Link, NavLink } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
+const links = [
+  { to: '/', label: 'Home', end: true },
+  { to: '/about', label: 'About' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/skills', label: 'Skills' },
+  { to: '/timeline', label: 'Timeline' },
+  { to: '/resume', label: 'Resume' },
+  { to: '/blog', label: 'Blog' },
+  { to: '/contact', label: 'Contact' },
+];
+
 export default function Navbar() {
   return (
-    <header className="nav">
-      {/* <Link to="/" className="brand">Utsav Bose</Link> */}
-      // replace brand text with a tiny logo orb + name
-<Link to="/" className="brand">
-  <span style={{
-    display:'inline-block', width:18, height:18, marginRight:8, borderRadius:'50%',
-    background:'radial-gradient(circle at 30% 30%, #fff, #7aa2ff 40%, #9b72ff 70%)',
-    boxShadow:'0 0 18px #7aa2ff66'
-  }} />
-  Utsav Bose
-</Link>
+    <header className="nav-wrap">
+      <div className="nav container-wide">
+        <Link to="/" className="brand" aria-label="Go to homepage">
+          <span className="brand-orb" />
+          <span>
+            Utsav Bose
+            <small>Full Stack Portfolio</small>
+          </span>
+        </Link>
 
-      <nav>
-        <NavLink to="/" end>Home</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/projects">Projects</NavLink>
-        <NavLink to="/blog">Blog</NavLink>  
-        <NavLink to="/contact">Contact</NavLink>
-      </nav>
-      <ThemeToggle />
+        <nav className="nav-links" aria-label="Main navigation">
+          {links.map((item) => (
+            <NavLink key={item.to} to={item.to} end={item.end}>
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        <ThemeToggle />
+      </div>
     </header>
   );
 }
